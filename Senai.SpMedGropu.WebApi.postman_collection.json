@@ -1,0 +1,309 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Senai.SpMedGropu.WebApi",
+		"_postman_id": "c125ebf3-6987-34b3-a02d-5faea39a1919",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"description": "",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"url": "http://localhost:5000/api/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"andreltgribeiro@gmail.com\",\n\t\"senha\": \"12345\"\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Medicos",
+					"request": {
+						"url": "http://localhost:5000/api/usuarios/medicos",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"andreltgribeiro@gmail.com\",\n\t\"senha\":\"123456\",\n\t\"datacadastro\":\"07/02/2019\",\n\t\"tipousuario\":\"1\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Pacientes",
+					"request": {
+						"url": "http://localhost:5000/api/usuarios/administrador",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Administrados",
+					"request": {
+						"url": "http://localhost:5000/api/usuarios/administrador",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"adm\",\n\t\"email\": \"adm@adm.com\",\n\t\"senha\": \"senha\",\n\t\"IdTipoUsuario\": 1\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Medico",
+					"request": {
+						"url": "http://localhost:5000/api/usuarios/medico",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n\t\"nome\": \"medico\",\n\t\"email\": \"medico@medicos.com\",\n\t\"senha\": \"senha\",\n\t\"CRM\": \"12342\",\n\t\"IdTipoUsuario\": 2\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Paciente",
+					"request": {
+						"url": "http://localhost:5000/api/co",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"paciente\",\n\t\"email\": \"paciente@pacientes.com\",\n\t\"senha\": \"senha\",\n\t\"datanascimento\": \"10/08/2001\",\n\t\"CPF\": \"44680479984\",\n\t\"endereco\": \"rual qualquer\",\n\t\"RG\": \"111123322\",\n\t\"IdTipoUsuario\": 3\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consultas",
+			"description": "",
+			"item": [
+				{
+					"name": "Listar Consultas",
+					"request": {
+						"url": "http://localhost:5000/api/consultas",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Consulta",
+					"request": {
+						"url": "http://localhost:5000/api/consultas/paciente",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"IdPaciente\": \"2\",\n\t\"IdMedico\": \"6\",\n\t\"DataConsulta\": \"03/03/2019\",\n\t\"Observacoes\": \"nenhuma\",\n\t\"IdStatus\": \"2\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Listar consulta por paciente",
+					"request": {
+						"url": "http://localhost:5000/api/consultas/paciente",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Por Usuario Logado",
+					"request": {
+						"url": "http://localhost:5000/api/consultas/listarporusuariologado",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Listar consulta por médico",
+					"request": {
+						"url": "http://localhost:5000/api/consultas/medico",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clinica",
+			"description": "",
+			"item": [
+				{
+					"name": "Cadastrar Clinica",
+					"request": {
+						"url": "http://localhost:5000/api/clinicas",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"clinicas\",\n\t\"RazaoSocial\": \"clinica top\",\n\t\"Cnpj\": \"66666666666\",\n\t\"HorarioFuncionamento\": \"da 10 as 17\",\n\t\"Localidade\": \"são paulo\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Clinica",
+					"request": {
+						"url": "http://localhost:5000/api/clinicas",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlbHRncmliZWlyb0BnbWFpbC5jb20iLCJqdGkiOiI3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTU1MzA4MzkwNiwiaXNzIjoiU3BNZWRHcm91cC5XZWJBcGkiLCJhdWQiOiJTcE1lZEdyb3VwLldlYkFwaSJ9.o_3Ag_AjpSoqX7aIPhYlMIMnu8A_STslXHmiXBcOnUo",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"clinicas\",\n\t\"RazaoSocial\": \"clinica top\",\n\t\"Cnpj\": \"66666666666\",\n\t\"HorarioFuncionamento\": \"da 10 as 17\",\n\t\"Localidade\": \"são paulo\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

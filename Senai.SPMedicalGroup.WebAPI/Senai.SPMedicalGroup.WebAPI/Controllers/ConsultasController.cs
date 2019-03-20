@@ -1,0 +1,139 @@
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using Senai.SPMedicalGroup.WebAPI.Domains;
+using Senai.SPMedicalGroup.WebAPI.Interfaces;
+using Senai.SPMedicalGroup.WebAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+
+namespace Senai.SPMedicalGroup.WebAPI.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
+    public class ConsultasController : ControllerBase
+    {
+        private IConsultaRepository ConsultaRepository { get; set; }
+        private IPacienteRepository PacienteRepository { get; set; }
+        private IMedicoRepository MedicoRepository { get; set; }
+
+        public ConsultasController()
+        {
+            ConsultaRepository = new ConsultaRepository();
+            PacienteRepository = new PacienteRepository();
+            MedicoRepository = new MedicoRepository();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Listar()
+        {
+            try
+            {
+                return Ok(ConsultaRepository.ListarTodas());
+            }
+            catch 
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Cadastrar(Consultas consulta)
+        {
+            try
+            {
+                ConsultaRepository.Cadastrar(consulta);
+
+                return Ok();
+            }
+            catch 
+            {
+                return BadRequest();
+            }
+        }
+
+
+
+        [HttpGet("paciente")]
+        [Authorize(Roles = "Paciente")]
+        public IActionResult ListarPorPaciente()
+        {
+            try
+            {
+                int usuarioId = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                Pacientes pacienteProcurado = PacienteRepository.BuscarPacientePorIdUsuario(usuarioId);
+
+                if (pacienteProcurado == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(ConsultaRepository.ListarPorIdPaciente(pacienteProcurado.Id));
+            }
+            catch 
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("listarporusuariologado")]
+        [Authorize]
+        public IActionResult ListarPorLogado()
+        {
+            try
+            {
+                int usuarioId = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+                string usuarioTipo = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value.ToString();
+
+                if (usuarioTipo == "Médico")
+                {
+                    return Ok(ConsultaRepository.ListarPorIdMedico(usuarioId));
+                }
+                else if (usuarioTipo == "Paciente")
+                {
+                    return Ok(ConsultaRepository.ListarPorIdPaciente(usuarioId));
+                }
+                else
+                {
+                    return BadRequest();
+                }
+
+            }
+            catch 
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("medico")]
+        [Authorize(Roles = "Médico")]
+        public IActionResult ListarPorMedico()
+        {
+            try
+            {
+                int usuarioId = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                Medicos medicoProcurado = MedicoRepository.BuscarMedicoPorIdUsuario(usuarioId);
+
+                if (medicoProcurado == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(ConsultaRepository.ListarPorIdMedico(medicoProcurado.Id));
+            }
+            catch 
+            {
+                return BadRequest();
+            }
+        }
+    }
+}
