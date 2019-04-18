@@ -47,5 +47,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Interfaces
         /// <param name="usuario"></param>
         /// <returns></returns>
         CadastrarUsuarioViewModel RetornarUsuarioViewModel(AdministradorStandaloneViewModel usuarioModel);
+
+        Usuarios BuscarPorId(int Id);
     }
 }

@@ -34,6 +34,21 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult ListarTodas()
+        {
+            try
+            {
+                
+                return Ok(ClinicaRepository.ListarTodas());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Atualizar(Clinica novaClinica)

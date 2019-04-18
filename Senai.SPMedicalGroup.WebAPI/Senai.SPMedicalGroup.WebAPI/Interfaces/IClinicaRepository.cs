@@ -1,4 +1,5 @@
 ﻿using Senai.SPMedicalGroup.WebAPI.Domains;
+using System.Collections.Generic;
 
 namespace Senai.SPMedicalGroup.WebAPI.Interfaces
 {
@@ -23,5 +24,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Interfaces
         /// <param name="idClinica">Id primário da clínica.</param>
         /// <returns>Retorna uma clínica.</returns>
         Clinica BuscarClinicaPorId(int idClinica);
+
+        List<Clinica> ListarTodas();
     }
 }

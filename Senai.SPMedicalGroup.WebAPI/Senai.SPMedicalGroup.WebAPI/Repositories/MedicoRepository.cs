@@ -23,7 +23,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
-                return ctx.Medicos.Include(x => x.IdUsuarioNavigation).ToList();
+                return ctx.Medicos.Include(x => x.IdUsuarioNavigation).Include(x => x.IdEspecialidadeNavigation).ToList();
             }
         }
 

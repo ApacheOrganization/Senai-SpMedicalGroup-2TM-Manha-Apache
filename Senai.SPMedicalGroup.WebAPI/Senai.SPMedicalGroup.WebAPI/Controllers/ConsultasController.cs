@@ -20,6 +20,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
     {
         private IConsultaRepository ConsultaRepository { get; set; }
         private IPacienteRepository PacienteRepository { get; set; }
+        private IUsuarioRepository UsuarioRepository { get; set; }
         private IMedicoRepository MedicoRepository { get; set; }
 
         public ConsultasController()
@@ -27,6 +28,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
             ConsultaRepository = new ConsultaRepository();
             PacienteRepository = new PacienteRepository();
             MedicoRepository = new MedicoRepository();
+            UsuarioRepository = new UsuarioRepository();
         }
 
         [HttpGet]
@@ -35,7 +37,21 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
         {
             try
             {
-                return Ok(ConsultaRepository.ListarTodas());
+                List<Consultas> consultas = ConsultaRepository.ListarTodas();
+
+                var retornoConsultas = from c in consultas
+                                       select new
+                                       {
+                                           idConsulta = c.Id,
+                                           pacienteCPF = c.IdPacienteNavigation.Cpf,
+                                           pacienteRG = c.IdPacienteNavigation.Rg,
+                                           pacienteEnd = c.IdPacienteNavigation.Endereco,
+                                           nomeMedico = c.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                                           dataConsulta = c.DataConsulta,
+                                           observacoes = c.Observacoes,
+                                           statusConsulta = c.IdStatusNavigation.Nome                                           
+                                       };
+                return Ok(retornoConsultas);
             }
             catch 
             {
@@ -95,11 +111,45 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
 
                 if (usuarioTipo == "Médico")
                 {
-                    return Ok(ConsultaRepository.ListarPorIdMedico(usuarioId));
+                    Usuarios procurado = UsuarioRepository.BuscarPorId(usuarioId);
+
+                    List<Consultas> consultas = ConsultaRepository.ListarPorIdMedico(usuarioId);
+
+                    var retornoConsultas = from c in consultas
+                                           select new
+                                           {
+                                               idConsulta = c.Id,
+                                               pacienteCPF = c.IdPacienteNavigation.Cpf,
+                                               pacienteRG = c.IdPacienteNavigation.Rg,
+                                               pacienteEnd = c.IdPacienteNavigation.Endereco,
+                                               nomeMedico = c.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                                               dataConsulta = c.DataConsulta,
+                                               observacoes = c.Observacoes,
+                                               statusConsulta = c.IdStatusNavigation.Nome
+                                           };
+
+                    return Ok(retornoConsultas);
                 }
                 else if (usuarioTipo == "Paciente")
                 {
-                    return Ok(ConsultaRepository.ListarPorIdPaciente(usuarioId));
+                    Usuarios procurado = UsuarioRepository.BuscarPorId(usuarioId);
+
+                    List<Consultas> consultas = ConsultaRepository.ListarPorIdPaciente(usuarioId);
+
+                    var retornoConsultas = from c in consultas
+                                           select new
+                                           {
+                                               idConsulta = c.Id,
+                                               pacienteCPF = c.IdPacienteNavigation.Cpf,
+                                               pacienteRG = c.IdPacienteNavigation.Rg,
+                                               pacienteEnd = c.IdPacienteNavigation.Endereco,
+                                               nomeMedico = c.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                                               dataConsulta = c.DataConsulta,
+                                               observacoes = c.Observacoes,
+                                               statusConsulta = c.IdStatusNavigation.Nome
+                                           };
+
+                    return Ok(retornoConsultas);
                 }
                 else
                 {

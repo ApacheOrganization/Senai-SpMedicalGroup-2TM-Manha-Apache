@@ -1,4 +1,5 @@
-﻿using Senai.SPMedicalGroup.WebAPI.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai.SPMedicalGroup.WebAPI.Domains;
 using Senai.SPMedicalGroup.WebAPI.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,9 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
-                return ctx.Consultas.Where(x => x.IdMedico == idMedico).ToList();
+                Medicos medicoBuscado = ctx.Medicos.Where(p => p.IdUsuario == idMedico).FirstOrDefault();
+
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).Where(x => x.IdMedico == medicoBuscado.Id).ToList();
             }
         }
 
@@ -56,7 +59,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
-                return ctx.Consultas.ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x=>x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).ToList();
             }
         }
 
@@ -64,8 +67,9 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
+                Pacientes pacienteBuscado = ctx.Pacientes.Where(p => p.IdUsuario == idPaciente).FirstOrDefault();
                 // Retorna as consultas do paciente
-                return ctx.Consultas.Where(x => x.IdPaciente == idPaciente).ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).Where(x => x.IdPaciente == pacienteBuscado.Id).ToList();
             }
         }
     }

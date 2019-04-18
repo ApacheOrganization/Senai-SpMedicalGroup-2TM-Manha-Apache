@@ -40,5 +40,13 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
                 ctx.SaveChanges();
             }
         }
+
+        public List<Clinica> ListarTodas()
+        {
+            using (SPMedGroupContext ctx = new SPMedGroupContext())
+            {
+                return ctx.Clinica.ToList();
+            }
+        }
     }
 }

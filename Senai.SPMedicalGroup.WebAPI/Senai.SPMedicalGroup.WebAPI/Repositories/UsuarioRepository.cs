@@ -131,5 +131,13 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
 
             return usuario;
         }
+
+        public Usuarios BuscarPorId(int Id)
+        {
+            using (SPMedGroupContext ctx = new SPMedGroupContext())
+            {
+                return ctx.Usuarios.Find(Id);
+            }
+        }
     }
 }
