@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Cabecalho from '../../Components/NavBar';
+import Rodape from '../../Components/Footer';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class Pacientes extends Component{
     constructor(){
@@ -28,41 +31,47 @@ class Pacientes extends Component{
     render(){
         return(
             <div>
-                <table id="tabela-lista">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>nome</th>
-                    <th>rg</th>
-                    <th>cpf</th>
-                    <th>dataNascimento</th>
-                    <th>endereco</th>
-                    <th>email</th>
-                    <th>telefone</th>
+                <Cabecalho/>
+                <br/>
+                <br/>
+                <div style={{paddingLeft:"2em", paddingRight:"2em"}}>
+                <MDBTable >
+                    <MDBTableHead color="primary-color" textWhite>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>RG</th>
+                            <th>CPF</th>
+                            <th>Data de Nascimento</th>
+                            <th>Endereço</th>
+                            <th>E-mail</th>
+                            <th>Telefone</th>
+                        </tr>
+                    </MDBTableHead>
+                    <MDBTableBody>
+                            {
+                            this.state.pacientes.map(function(pac){
+                                return(
+                                        <tr key={pac.id}>
+                                            <td>{pac.id}</td>
+                                            <td>{pac.idUsuarioNavigation.nome}</td>
+                                            <td>{pac.rg}</td>
+                                            <td>{pac.cpf}</td>
+                                            <td>{pac.dataNascimento}</td>
+                                            <td>{pac.endereco}</td>
+                                            <td>{pac.idUsuarioNavigation.email}</td>
+                                            <td>{pac.idUsuarioNavigation.telefone}</td>
 
-                  </tr>
-                </thead>
-
-                <tbody>
-                    {
-                       this.state.pacientes.map(function(pac){
-                           return(
-                                <tr key={pac.id}>
-                                    <td>{pac.id}</td>
-                                    <td>{pac.idUsuarioNavigation.nome}</td>
-                                    <td>{pac.rg}</td>
-                                    <td>{pac.cpf}</td>
-                                    <td>{pac.dataNascimento}</td>
-                                    <td>{pac.endereco}</td>
-                                    <td>{pac.idUsuarioNavigation.email}</td>
-                                    <td>{pac.idUsuarioNavigation.telefone}</td>
-
-                                </tr>
-                           );
-                       }) 
-                    }
-                </tbody>
-              </table>
+                                        </tr>
+                                );
+                            }) 
+                            }
+                    </MDBTableBody>
+                </MDBTable>
+                </div>
+              <br/>
+              <br/>
+              <Rodape/>
             </div>
         );
     }

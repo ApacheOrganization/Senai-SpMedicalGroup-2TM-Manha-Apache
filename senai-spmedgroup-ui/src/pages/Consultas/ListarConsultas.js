@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Cabecalho from '../../Components/NavBar';
+import Rodape from '../../Components/Footer';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class Consultas extends Component{
     constructor(){
@@ -9,7 +12,6 @@ class Consultas extends Component{
     }
 
     ListarConsultas(){
-        console.log('Bearer ' + localStorage.getItem("usuario-lindao"));
         fetch('http://localhost:5000/api/consultas',{
             method: 'GET',
             headers : {
@@ -28,23 +30,25 @@ class Consultas extends Component{
     render(){
         return(
             <div>
-                <table id="tabela-lista">
-                <thead>
-                  <tr>
+                <Cabecalho/>
+                <br/>
+                <br/>
+              <MDBTable >
+                <MDBTableHead color="primary-color" textWhite>
+                <tr>
                     <th>#</th>
-                    <th>pacienteCPF</th>
-                    <th>pacienteRG</th>
-                    <th>pacienteEnd</th>
-                    <th>nomeMedico</th>
-                    <th>dataConsulta</th>
-                    <th>observacoes</th>
-                    <th>statusConsulta</th>
+                    <th>CPF Paciente</th>
+                    <th>RG Paciente</th>
+                    <th>Endereço Paciente</th>
+                    <th>Nome Médico</th>
+                    <th>Data</th>
+                    <th>Observações</th>
+                    <th>Status</th>
                     
                   </tr>
-                </thead>
-
-                <tbody>
-                    {
+                </MDBTableHead>
+                <MDBTableBody>
+                {
                        this.state.consultas.map(function(cons){
                            return(
                                 <tr key={cons.idConsulta}>
@@ -60,8 +64,11 @@ class Consultas extends Component{
                            );
                        }) 
                     }
-                </tbody>
-              </table>
+                </MDBTableBody>
+              </MDBTable>
+              <br/>
+              <br/>
+              <Rodape/>
             </div>
         );
     }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Senai.SPMedicalGroup.WebAPI.Domains;
@@ -31,7 +33,18 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
         {
             try
             {
-                return Ok(MedicoRepository.ListarMedicos());
+                List<Medicos> Medicos = MedicoRepository.ListarMedicos();
+                var resultado = from m in Medicos
+                                select new
+                                {
+                                    id = m.Id,
+                                    crm = m.Crm,
+                                    Especialidade = m.IdEspecialidadeNavigation.Nome,
+                                    Nome = m.IdUsuarioNavigation.Nome,
+                                    Email = m.IdUsuarioNavigation.Email,
+                                    Telefone = m.IdUsuarioNavigation.Telefone
+                                };
+                return Ok(resultado);
             }
             catch 
             {
@@ -45,7 +58,22 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
         {
             try
             {
-                return Ok(PacienteRepository.ListarPacientes());
+                List<Pacientes> pacientes = PacienteRepository.ListarPacientes();
+
+                var resultado = from p in pacientes
+                                select new
+                                {
+                                    id = p.Id,
+                                    idUsuario = p.IdUsuario,
+                                    rg = p.Rg,
+                                    cpf = p.Cpf,
+                                    dataNascimento = p.DataNascimento,
+                                    endereco = p.Endereco,
+                                    nome = p.IdUsuarioNavigation.Nome,
+                                    telefone = p.IdUsuarioNavigation.Telefone,
+                                    idTipoUsuario = p.IdUsuarioNavigation.IdTipoUsuario
+                                };
+                return Ok(resultado);
             }
             catch 
             {
@@ -65,9 +93,12 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
 
                 return Ok();
             }
-            catch 
+            catch (Exception ex)
                     {
-                return BadRequest();
+                return BadRequest(new
+                {
+                    mensagem = "Erro: " + ex
+                });
             }
         }
 
@@ -83,9 +114,12 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
 
                 return Ok();
             }
-            catch 
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(new
+                {
+                    mensagem = "Erro: " + ex
+                });
             }
         }
 
@@ -95,9 +129,11 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
         {
             try
             {
+                LoginViewModel login = new LoginViewModel();
+
                 PacienteViewModel paciente = PacienteRepository.RetornarPacienteViewModel(pacienteModel);
 
-                
+                Usuarios usuario = UsuarioRepository.BuscarPorEmail(login);
 
                 if (paciente.Paciente.DataNascimento.Date > DateTime.Now.Date)
                 {
@@ -108,9 +144,9 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
 
                 return Ok();
             }
-            catch  
+            catch  (Exception ex)
             {
-                return BadRequest();
+                throw ex;
             }
         }
     }

@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Cabecalho from '../../Components/NavBar';
+import Rodape from '../../Components/Footer';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class Medicos extends Component{
     constructor(){
@@ -28,35 +31,40 @@ class Medicos extends Component{
     render(){
         return(
             <div>
-                <table id="tabela-lista">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>crm</th>
-                    <th>nome</th>
-                    <th>email</th>
-                    <th>telefone</th>
-                    <th>Especialidade</th>
-                  </tr>
-                </thead>
-
-                <tbody>
+                <Cabecalho/>
+                <br/>
+                <br/>
+              <MDBTable >
+                <MDBTableHead color="primary-color" textWhite>
+                    <tr>
+                        <th>#</th>
+                        <th>crm</th>
+                        <th>nome</th>
+                        <th>email</th>
+                        <th>telefone</th>
+                        <th>Especialidade</th>
+                    </tr>
+                </MDBTableHead>
+                <MDBTableBody>
                     {
                        this.state.medicos.map(function(med){
                            return(
                                 <tr key={med.id}>
                                     <td>{med.id}</td>
                                     <td>{med.crm}</td>
-                                    <td>{med.idUsuarioNavigation.nome}</td>
-                                    <td>{med.idUsuarioNavigation.email}</td>
-                                    <td>{med.idUsuarioNavigation.telefone}</td>
-                                    <td>{med.idEspecialidadeNavigation.nome}</td>   
+                                    <td>{med.nome}</td>
+                                    <td>{med.email}</td>
+                                    <td>{med.telefone}</td>
+                                    <td>{med.especialidade}</td>   
                                 </tr>
                            );
                        }) 
                     }
-                </tbody>
-              </table>
+                </MDBTableBody>
+              </MDBTable>
+                <br/>
+                <br/>
+              <Rodape/>
             </div>
         );
     }

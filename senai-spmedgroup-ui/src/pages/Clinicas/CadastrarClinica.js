@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput,MDBCard, MDBCardBody } from 'mdbreact';
+import Cabecalho from '../../Components/NavBar';
+import Rodape from '../../Components/Footer';
 
 class CadastrarClinicas extends Component{
     constructor(){
@@ -9,7 +12,8 @@ class CadastrarClinicas extends Component{
             razaosocial : "",
             cnpj : "",
             horariofuncionamento : "",
-            localidade : ""
+            localidade : "",
+            erromensagem : ""
 
         }
         this.atualizaEstadoNomeFormulario = this.atualizaEstadoNome.bind(this);
@@ -20,7 +24,6 @@ class CadastrarClinicas extends Component{
     }
 
     ListarClinicas(){
-        console.log('Bearer ' + localStorage.getItem("usuario-lindao"));
         fetch('http://localhost:5000/api/clinicas',{
             method: 'GET',
             headers : {
@@ -50,7 +53,14 @@ class CadastrarClinicas extends Component{
                'Authorization': 'Bearer ' + localStorage.getItem("usuario-lindao")
              }
          })
-         .then(response => response)
+         .then(response => {
+          if (response.status === 200) {
+            alert("Clínica Cadastrada!");
+            this.Redirecionar();
+          } else {
+            this.setState({ erromensagem: 'Houve um erro' + response.mensagem })   
+          }
+         })
          .then(this.ListarClinicas())
          .catch(erro => console.log(erro))
     }
@@ -75,59 +85,98 @@ class CadastrarClinicas extends Component{
     componentDidMount(){
         this.ListarClinicas();
     }
+    Redirecionar(){
+      this.props.history.push('/clinicas');
+    }
 
     render(){
         return(
-            <div className="container" id="conteudoPrincipal-cadastro">
-              <h2 className="conteudoPrincipal-cadastro-titulo">
-                Cadastrar Clinicas
-              </h2>
-              <form onSubmit={this.CadastraClinica.bind(this)}>
-                <div className="container">
-                  <input
-                    type="text"
-                    value={this.state.nome}
-                    onChange={this.atualizaEstadoNomeFormulario}
-                    id="nomeUsuario"
-                    placeholder="Nome Usuário"
-                  />
-                  <input
-                    type="text"
-                    value={this.state.razaosocial}
-                    onChange={this.atualizaEstadoRazaoSocial}
-                    id="emailUsuario"
-                    placeholder="Email"
-                  />
-                  <input
-                    type="password"
-                    value={this.state.cnpj}
-                    onChange={this.atualizaEstadoCNPJ}
-                    id="senhaUsuario"
-                    placeholder="Senha"
-                  />
-                  <input
-                    type="text"
-                    value={this.state.horariofuncionamento}
-                    onChange={this.atualizaEstadoHorFunc}
-                    id="dataNascimentoUsuario"
-                    placeholder="Data Nascimento"
-                  />
-                  <input
-                    type="text"
-                    value={this.state.localidade}
-                    onChange={this.atualizaEstadoLocalidade}
-                    id="relefoneUsuario"
-                    placeholder="Telefone"
-                  />
-                  <button type="submit" className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">
-                    Cadastrar
-                  </button>
-                  <button onClick={this.CadastraClinica.bind(this)} className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">
-                    Cadastrar
-                  </button>
-                </div>
-              </form>
-            </div>
+<div id="conteudoPrincipal-cadastro">
+<Cabecalho/>
+<br/>
+            <br/>
+  <MDBContainer style={{marginLeft:"40em"}}>
+    <MDBRow>
+      <MDBCol md="6">
+      <MDBCard>
+
+        <MDBCardBody>
+
+        <form onSubmit={this.CadastraClinica.bind(this)}>
+          <p className="h5 text-center mb-4">Cadastrar Clinica</p>
+          <div className="grey-text">
+            <MDBInput
+              label="Nome"
+              icon="user"
+              group
+              type="text"
+              validate
+              error="wrong"
+              success="right"
+              required
+              value={this.state.nome}
+              onChange={this.atualizaEstadoNomeFormulario}
+              />
+            <MDBInput
+              label="Razão Social"
+              icon="envelope"
+              group
+              type="text"
+              validate
+              error="wrong"
+              success="right"
+              required
+              value={this.state.razaosocial}
+              onChange={this.atualizaEstadorazaosocialFormulario}
+              />
+            <MDBInput
+              label="CNPJ"
+              icon="exclamation-triangle"
+              group
+              type="text"
+              validate
+              maxlength="14"
+              minlength="14"
+              error="wrong"
+              success="right"
+              required
+              value={this.state.cnpj}
+              onChange={this.atualizaEstadocnpjFormulario}
+              />
+            <MDBInput
+              label="Horário Funcionamento"
+              icon="lock"
+              group
+              type="text"
+              validate
+              required
+              value={this.state.horariofuncionamento}
+              onChange={this.atualizaEstadohorariofuncionamentoFormulario}
+              />
+            <MDBInput
+              label="Localidade"
+              icon="lock"
+              group
+              type="text"
+              validate
+              required
+              value={this.state.localidade}
+              onChange={this.atualizaEstadolocalidadeFormulario}
+              />
+          </div>
+          <div className="text-center">
+            <MDBBtn type="submit"color="primary">Cadastrar</MDBBtn>
+          </div>
+        </form>
+              </MDBCardBody>
+              </MDBCard>
+      </MDBCol>
+    </MDBRow>
+</MDBContainer>
+<br/>
+<br/>
+<Rodape/>
+</div>
         );
     }
 }

@@ -34,6 +34,8 @@ namespace Senai.SPMedicalGroup.WebAPI.Interfaces
         /// <returns>Usuarios Object</returns>
         Usuarios BuscarPorEmailESenha(LoginViewModel login);
 
+        Usuarios BuscarPorEmail(LoginViewModel login);
+
         /// <summary>
         /// Retorna um Usuarios a partir da VIewModel.
         /// </summary>

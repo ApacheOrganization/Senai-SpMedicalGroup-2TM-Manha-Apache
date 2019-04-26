@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBCard, MDBCardBody } from 'mdbreact';
 import Cabecalho from '../../Components/NavBar';
+import Rodape from '../../Components/Footer';
 
 class CadastroUsuarios extends Component{
     constructor(){
@@ -15,7 +16,8 @@ class CadastroUsuarios extends Component{
             CPF : "",
             endereco : "",
             RG : "",
-            IdTipoUsuario : ""
+            IdTipoUsuario : "",
+            erromensagem: ""
 
         }
         this.atualizaEstadoNomeFormulario = this.atualizaEstadoNome.bind(this);
@@ -30,7 +32,6 @@ class CadastroUsuarios extends Component{
     }
 
     ListarUsuarios(){
-        console.log('Bearer ' + localStorage.getItem("usuario-lindao"));
         fetch('http://localhost:5000/api/usuarios/pacientes',{
             method: 'GET',
             headers : {
@@ -46,16 +47,14 @@ class CadastroUsuarios extends Component{
         event.preventDefault();
         
         var url = 'http://localhost:5000/api/usuarios'
-
-        if(this.state.IdTipoUsuario === 1){
+        if(this.state.IdTipoUsuario === "1"){
           url='http://localhost:5000/api/usuarios/administrador'
-        }else if(this.state.IdTipoUsuario === 2){
+        }else if(this.state.IdTipoUsuario === "2"){
           url='http://localhost:5000/api/usuarios/medico'
         }else{
           url='http://localhost:5000/api/usuarios/paciente'
         }
-        debugger;
-        console.log(this.state.email)
+        
 
          fetch(url,{
              method : 'POST',
@@ -75,7 +74,13 @@ class CadastroUsuarios extends Component{
                'Authorization': 'Bearer ' + localStorage.getItem("usuario-lindao")
              }
          })
-         .then(response => response)
+         .then(response => {
+          if (response.status === 200) {
+            alert("Usuário Cadastrado!");
+          } else {
+            this.setState({ erromensagem: 'Houve um erro' + response.mensagem })   
+          }
+         })
          .then(this.ListarUsuarios())
          .catch(erro => console.log(erro))
     }
@@ -118,12 +123,25 @@ class CadastroUsuarios extends Component{
           
             <div id="conteudoPrincipal-cadastro">
             <Cabecalho/>
+            <br/>
+            <br/>
               <MDBContainer>
                 <MDBRow>
-                  <MDBCol md="6">
-                    <form>
-                      <p className="h5 text-center mb-4">Sign up</p>
+                  <MDBCol className="text-center"style={{height:"60em"}} >
+                  <MDBCard>
+                  <MDBCardBody>
+
+                    <form onSubmit={this.CadastraUsuario.bind(this)}>
+                      <p className="h5 text-center mb-4">Cadastre um usuario</p>
                       <div className="grey-text">
+                      <select value={this.state.IdTipoUsuario} style={{width:"15em"}} onChange={this.atualizaEstadoTipoFormulario} className="browser-default custom-select">
+                        <option>Tipo de Usuario</option>
+                        <option value="1">Administrador</option>
+                        <option value="3">Paciente</option>
+                      </select>
+                      <br/>
+                      <br/>
+                      
                         <MDBInput
                           label="Nome"
                           icon="user"
@@ -132,9 +150,10 @@ class CadastroUsuarios extends Component{
                           validate
                           error="wrong"
                           success="right"
+                          required
                           value={this.state.nome}
                           onChange={this.atualizaEstadoNomeFormulario}
-                        />
+                          />
                         <MDBInput
                           label="E-Mail"
                           icon="envelope"
@@ -143,9 +162,10 @@ class CadastroUsuarios extends Component{
                           validate
                           error="wrong"
                           success="right"
+                          required
                           value={this.state.email}
-                    onChange={this.atualizaEstadoEmailFormulario}
-                        />
+                          onChange={this.atualizaEstadoEmailFormulario}
+                          />
                         <MDBInput
                           label="Senha"
                           icon="exclamation-triangle"
@@ -154,73 +174,81 @@ class CadastroUsuarios extends Component{
                           validate
                           error="wrong"
                           success="right"
+                          required
                           value={this.state.senha}
-                    onChange={this.atualizaEstadoSenhaFormulario}
-                        />
+                          onChange={this.atualizaEstadoSenhaFormulario}
+                          />
                         <MDBInput
                           label="Data de Nascimento"
                           icon="lock"
                           group
                           type="date"
                           validate
+                          required
                           value={this.state.datanascimento}
-                    onChange={this.atualizaEstadoDataFormulario}
-                        />
+                          onChange={this.atualizaEstadoDataFormulario}
+                          />
                         <MDBInput
                           label="Telefone"
                           icon="lock"
                           group
                           type="tel"
                           validate
+                          required
                           value={this.state.telefone}
-                    onChange={this.atualizaEstadoTelFormulario}
-                        />
+                          onChange={this.atualizaEstadoTelFormulario}
+                          />
                         <MDBInput
                         label="CPF"
                         icon="lock"
                         group
+                        minLength="11"
+                        maxLength="11"
                         type="text"
                         validate
+                        required
                         value={this.state.CPF}
-                    onChange={this.atualizaEstadoCPFFormulario}
-                      />
+                        onChange={this.atualizaEstadoCPFFormulario}
+                        />
                       <MDBInput
                         label="Endereço"
                         icon="lock"
                         group
                         type="text"
                         validate
+                        required
                         value={this.state.endereco}
-                    onChange={this.atualizaEstadoEndFormulario}
-                      />
+                        onChange={this.atualizaEstadoEndFormulario}
+                        />
                       <MDBInput
                         label="RG"
                         icon="lock"
                         group
-                        type="number"
+                        minLength="9"
+                        maxLength="9"
+                        type="text"
                         validate
+                        required
                         value={this.state.RG}
-                    onChange={this.atualizaEstadoRGFormulario}
-                      />
-                      <MDBInput
-                        label="Id Tipo Usuario"
-                        icon="lock"
-                        group
-                        type="number"
-                        validate
-                        value={this.state.IdTipoUsuario}
-                    onChange={this.atualizaEstadoTipoFormulario}
-                      />
+                        onChange={this.atualizaEstadoRGFormulario}
+                        />
 
+                      <br/>
+                      <br/>
 
                       </div>
                       <div className="text-center">
-                        <MDBBtn type="submit"color="primary">Register</MDBBtn>
+                      <p>{this.state.erromensagem}</p>
+                        <MDBBtn type="submit"color="primary">Cadastrar</MDBBtn>
                       </div>
                     </form>
+                        </MDBCardBody>
+                        </MDBCard>
                   </MDBCol>
                 </MDBRow>
             </MDBContainer>
+
+            <Rodape/>
             </div>
         );
     }

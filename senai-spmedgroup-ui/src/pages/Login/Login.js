@@ -4,6 +4,8 @@ import {parseJwt} from '../../Services/Auth';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../assets/css/Login.css';
 import "mdbreact/dist/css/mdb.css";
+import Rodape from '../../Components/Footer';
+import Cabecalho from '../../Components/NavBar';
 import {MDBCol } from "mdbreact";
 import { MDBContainer, MDBRow, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 
@@ -50,19 +52,27 @@ class Login extends Component{
                 }   
             }
         })
-        .catch(erro => {this.setState({errorMessage : 'Email ou Senha incorretos'})});
+        .catch(erro => {this.setState({errorMessage : 'Email ou Senha inválidos'})});
     }
 
     render(){
         return(
-            <MDBContainer>
-            <MDBRow>
-              <MDBCol md="6">
-              <MDBCard>
-              <MDBCardBody>
-                <form onSubmit={this.realizaLogin.bind(this)}>
-                  <p className="h5 text-center mb-4">Sign in</p>
-                  <div className="grey-text">
+          <div>
+          <Cabecalho/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+            <MDBContainer style={{marginBottom:'28px'}}>
+            <MDBRow style={{marginLeft:'17.5em'}}>
+              <MDBCol md="8"  >
+              <MDBCard style={{height:'22em'}}>
+              <MDBCardBody style={{height:'25em'}}>
+                <form onSubmit={this.realizaLogin.bind(this)} style={{padding:'10px', height:'25em'}}>
+                  <p style={{marginTop:'15px', marginBottom:'15px'}} className="h5 text-center mb-4">Login</p>
+                  <div className="grey-text" style={{marginLeft:'-32px'}}>
                     <MDBInput
                       label="Escreva seu email"
                       icon="envelope"
@@ -71,6 +81,7 @@ class Login extends Component{
                       validate
                       error="wrong"
                       success="right"
+                      required
                       value={this.state.email}
                       onChange={this.atualizaEstadoEmail.bind(this)}
                     />
@@ -80,12 +91,14 @@ class Login extends Component{
                       group
                       type="password"
                       validate
+                      required
                       value={this.state.senha}
                       onChange={this.atualizaEstadoSenha.bind(this)}
                     />
                   </div>
                   <div className="text-center">
-                    <MDBBtn type="submit">Login</MDBBtn>
+                    <p>{this.state.errorMessage}</p>
+                    <MDBBtn color="success" type="submit">Login</MDBBtn>
                   </div>
                 </form>
                 </MDBCardBody>
@@ -93,6 +106,14 @@ class Login extends Component{
               </MDBCol>
             </MDBRow>
           </MDBContainer>
+          <br/>
+          <br/>
+          <br/>
+          
+          <br/>
+          <br/>
+          <Rodape />
+          </div>
         );
     }
 }

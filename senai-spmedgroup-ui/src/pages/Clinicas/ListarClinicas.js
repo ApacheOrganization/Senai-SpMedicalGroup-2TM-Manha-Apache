@@ -1,30 +1,32 @@
 import React, { Component } from "react";
 import Cabecalho from '../../Components/NavBar';
 import Rodape from '../../Components/Footer';
+
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
-class ConsoltasLogado extends Component{
+
+class Clinicas extends Component{
     constructor(){
         super();
         this.state = {
-            consultas : []
+            clinicas : []
         }
     }
 
-    ListarConsultas(){
-        fetch('http://localhost:5000/api/consultas/listarporusuariologado',{
+    ListarClinicas(){
+        fetch('http://localhost:5000/api/clinicas',{
             method: 'GET',
             headers : {
             'Authorization': 'Bearer ' + localStorage.getItem("usuario-lindao"),
             }
         })
             .then(resposta => resposta.json())
-            .then(data => this.setState({ consultas : data }))
+            .then(data => this.setState({ clinicas : data }))
             .catch(erro => console.log(erro)) 
     }
 
     componentDidMount(){
-        this.ListarConsultas();
+        this.ListarClinicas();
     }
 
     render(){
@@ -37,29 +39,25 @@ class ConsoltasLogado extends Component{
               <MDBTableHead color="primary-color" textWhite>
               <tr>
                     <th>#</th>
-                    <th>CPF Paciente</th>
-                    <th>RG Paciente</th>
-                    <th>Endereço Paciente</th>
-                    <th>Nome Médico</th>
-                    <th>Data</th>
-                    <th>Observações</th>
-                    <th>Status</th>
+                    <th>Nome</th>
+                    <th>Horario Funcionamento</th>
+                    <th>Endereço</th>
+                    <th>CNPJ</th>
+                    <th>Razão Social</th>
                     
                   </tr>
               </MDBTableHead>
               <MDBTableBody>
                 {
-                       this.state.consultas.map(function(cons){
+                       this.state.clinicas.map(function(cons){
                            return(
-                                <tr key={cons.idConsulta}>
-                                    <td>{cons.idConsulta}</td>
-                                    <td>{cons.pacienteCPF}</td>
-                                    <td>{cons.pacienteRG}</td>
-                                    <td>{cons.pacienteEnd}</td>
-                                    <td>{cons.nomeMedico}</td>
-                                    <td>{cons.dataConsulta}</td>
-                                    <td>{cons.observacoes}</td>
-                                    <td>{cons.statusConsulta}</td>
+                                <tr key={cons.id}>
+                                    <td>{cons.id}</td>
+                                    <td>{cons.nome}</td>
+                                    <td>{cons.horarioFuncionamento}</td>
+                                    <td>{cons.localidade}</td>
+                                    <td>{cons.cnpj}</td>
+                                    <td>{cons.razaoSocial}</td>
                                 </tr>
                            );
                        }) 
@@ -73,4 +71,4 @@ class ConsoltasLogado extends Component{
         );
     }
 }
-export default ConsoltasLogado;
+export default Clinicas;

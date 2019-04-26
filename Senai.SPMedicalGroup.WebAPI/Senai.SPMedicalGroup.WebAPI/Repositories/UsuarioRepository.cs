@@ -22,6 +22,16 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
             }
         }
 
+        public Usuarios BuscarPorEmail(LoginViewModel login)
+        {
+            using (SPMedGroupContext ctx = new SPMedGroupContext())
+            {
+                // terá tanto os usuários, quanto os tipos deles.
+                // Retorna um usuário que coincida com o e-mail e senha.
+                return ctx.Usuarios.Include(x => x.IdTipoUsuarioNavigation).FirstOrDefault(x => x.Email == login.Email);
+            }
+        }
+
         public void CadastrarUsuario(CadastrarUsuarioViewModel usuario) // O mesmo que cadastrar um administrador, tb serve para cadastrar um administrador.
         {
             Usuarios usuarioTemp;

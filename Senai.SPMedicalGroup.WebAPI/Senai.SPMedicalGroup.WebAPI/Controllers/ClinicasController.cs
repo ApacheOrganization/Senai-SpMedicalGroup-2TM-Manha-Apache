@@ -28,9 +28,9 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
                 ClinicaRepository.CadastrarDados(clinica);
                 return Ok();
             }
-            catch 
+            catch (Exception ex)
             {
-                return BadRequest();
+                throw ex;
             }
         }
 

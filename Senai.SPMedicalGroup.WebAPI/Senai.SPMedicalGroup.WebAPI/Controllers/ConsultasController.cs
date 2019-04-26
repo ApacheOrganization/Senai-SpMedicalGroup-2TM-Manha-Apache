@@ -69,9 +69,9 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
 
                 return Ok();
             }
-            catch 
+            catch (Exception ex)
             {
-                return BadRequest();
+                throw ex;
             }
         }
 

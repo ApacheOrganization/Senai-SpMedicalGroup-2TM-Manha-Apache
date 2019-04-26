@@ -8,10 +8,50 @@ import Login from './pages/Login/Login';
 import Medicos from './pages/Usuarios/ListarMedicos';
 import Pacientes from './pages/Usuarios/ListarPacientes';
 import Consultas from './pages/Consultas/ListarConsultas';
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
 import ConsoltasLogado from './pages/Consultas/ListarPorLogado';
 import CadastroUsuarios from './pages/Usuarios/CadastrarUsuarios';
 import CadastrarClinicas from './pages/Clinicas/CadastrarClinica';
+import Clinicas from './pages/Clinicas/ListarClinicas';
+import CadastroConsulta from './pages/Consultas/CadastrarConsultas';
+import CadastroMedico from './pages/Usuarios/CadastrarMedico';
+import { usuarioAutenticado, parseJwt } from "../src/Services/Auth";
+
+const PermissaoAdmin = ({ component: Component }) => (
+    <Route
+      render = { props => usuarioAutenticado() && parseJwt().permissao === "Administrador" ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{ pathname: "/Login" }} />
+        )
+      }
+    />
+  );
+
+  const PermissaoComum = ({ component: Component }) => (
+    <Route
+      render={props =>
+        usuarioAutenticado() && parseJwt().permissao === "Paciente" ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{ pathname: "/login" }} />
+        )
+      }
+    />
+  );
+
+    
+  const PermissaoMedico = ({ component: Component }) => (
+    <Route
+      render={props =>
+        usuarioAutenticado() && parseJwt().permissao === "MÃ©dico" ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{ pathname: "/login" }} />
+        )
+      }
+    />
+  );
 
 const rotas = (
     <Router>
@@ -19,12 +59,15 @@ const rotas = (
             <Switch>
                 <Route exact path="/" component={App} />
                 <Route path="/Login" component = {Login}/>
-                <Route path="/usuarios/medicos" component = {Medicos}/>
-                <Route path="/usuarios/pacientes" component = {Pacientes}/>
-                <Route path="/consultas" component = {Consultas}/>
+                <PermissaoAdmin path="/usuarios/medicos" component = {Medicos}/>
+                <PermissaoAdmin path="/usuarios/pacientes" component = {Pacientes}/>
+                <PermissaoAdmin path="/consultas" component = {Consultas}/>
                 <Route path="/minhasconsultas" component = {ConsoltasLogado}/>
-                <Route path="/cadastroUsuario" component = {CadastroUsuarios}/>
-                <Route path="/cadastroClinica" component = {CadastrarClinicas}/>
+                <PermissaoAdmin path="/cadastroUsuario" component = {CadastroUsuarios}/>
+                <PermissaoAdmin path="/cadastroClinica" component = {CadastrarClinicas}/>
+                <PermissaoAdmin path="/cadastroConsulta" component = {CadastroConsulta}/>
+                <PermissaoAdmin path="/clinicas" component = {Clinicas}/>
+                <PermissaoAdmin path="/cadastroMedico" component = {CadastroMedico}/>
                 <Route component={NotFound} />
             </Switch>
         </div>
