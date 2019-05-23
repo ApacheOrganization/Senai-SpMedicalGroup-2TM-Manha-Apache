@@ -46,7 +46,7 @@ namespace Senai.SPMedicalGroup.WebAPI
 
                         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("spmedgroup-chave-autenticacao")),
 
-                        ClockSkew = TimeSpan.FromMinutes(30),
+                        ClockSkew = TimeSpan.FromDays(10),
 
                         ValidIssuer = "SpMedGroup.WebApi",
 

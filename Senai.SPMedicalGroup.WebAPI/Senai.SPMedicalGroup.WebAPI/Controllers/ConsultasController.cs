@@ -46,9 +46,12 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
                                            pacienteCPF = c.IdPacienteNavigation.Cpf,
                                            pacienteRG = c.IdPacienteNavigation.Rg,
                                            pacienteEnd = c.IdPacienteNavigation.Endereco,
+                                           pacienteNome = c.IdPacienteNavigation.IdUsuarioNavigation.Nome,
                                            nomeMedico = c.IdMedicoNavigation.IdUsuarioNavigation.Nome,
                                            dataConsulta = c.DataConsulta,
                                            observacoes = c.Observacoes,
+                                           endereco = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Localidade,
+                                           nomeClinica = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Nome,
                                            statusConsulta = c.IdStatusNavigation.Nome                                           
                                        };
                 return Ok(retornoConsultas);
@@ -122,9 +125,12 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
                                                pacienteCPF = c.IdPacienteNavigation.Cpf,
                                                pacienteRG = c.IdPacienteNavigation.Rg,
                                                pacienteEnd = c.IdPacienteNavigation.Endereco,
+                                               pacienteNome = c.IdPacienteNavigation.IdUsuarioNavigation.Nome,
                                                nomeMedico = c.IdMedicoNavigation.IdUsuarioNavigation.Nome,
                                                dataConsulta = c.DataConsulta,
                                                observacoes = c.Observacoes,
+                                               endereco = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Localidade,
+                                               nomeClinica = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Nome,
                                                statusConsulta = c.IdStatusNavigation.Nome
                                            };
 
@@ -142,10 +148,13 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
                                                idConsulta = c.Id,
                                                pacienteCPF = c.IdPacienteNavigation.Cpf,
                                                pacienteRG = c.IdPacienteNavigation.Rg,
+                                               pacienteNome = c.IdPacienteNavigation.IdUsuarioNavigation.Nome,
                                                pacienteEnd = c.IdPacienteNavigation.Endereco,
                                                nomeMedico = c.IdMedicoNavigation.IdUsuarioNavigation.Nome,
                                                dataConsulta = c.DataConsulta,
                                                observacoes = c.Observacoes,
+                                               endereco = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Localidade,
+                                               nomeClinica = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Nome,
                                                statusConsulta = c.IdStatusNavigation.Nome
                                            };
 

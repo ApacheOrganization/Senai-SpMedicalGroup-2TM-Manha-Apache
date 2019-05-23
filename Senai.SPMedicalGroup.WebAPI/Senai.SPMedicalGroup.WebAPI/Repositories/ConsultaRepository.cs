@@ -51,7 +51,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
             {
                 Medicos medicoBuscado = ctx.Medicos.Where(p => p.IdUsuario == idMedico).FirstOrDefault();
 
-                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).Where(x => x.IdMedico == medicoBuscado.Id).ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x=>x.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation).Include(x=>x.IdPacienteNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).Where(x => x.IdMedico == medicoBuscado.Id).ToList();
             }
         }
 
@@ -59,7 +59,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
-                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x=>x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation).Include(x => x.IdPacienteNavigation.IdUsuarioNavigation).Include(x=>x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).ToList();
             }
         }
 
@@ -69,7 +69,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
             {
                 Pacientes pacienteBuscado = ctx.Pacientes.Where(p => p.IdUsuario == idPaciente).FirstOrDefault();
                 // Retorna as consultas do paciente
-                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).Where(x => x.IdPaciente == pacienteBuscado.Id).ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation).Include(x => x.IdPacienteNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).Where(x => x.IdPaciente == pacienteBuscado.Id).ToList();
             }
         }
     }

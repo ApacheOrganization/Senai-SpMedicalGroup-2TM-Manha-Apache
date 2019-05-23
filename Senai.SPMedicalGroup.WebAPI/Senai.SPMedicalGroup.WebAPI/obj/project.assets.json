@@ -12685,11 +12685,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\44680479841\\Desktop\\SpMedGroup-ProjetoApi\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\44680479841\\Desktop\\Clone SpMedGroup\\Senai-SpMedicalGroup-2TM-Manha-Apache\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI.csproj",
       "projectName": "Senai.SPMedicalGroup.WebAPI",
-      "projectPath": "C:\\Users\\44680479841\\Desktop\\SpMedGroup-ProjetoApi\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI.csproj",
+      "projectPath": "C:\\Users\\44680479841\\Desktop\\Clone SpMedGroup\\Senai-SpMedicalGroup-2TM-Manha-Apache\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI.csproj",
       "packagesPath": "C:\\Users\\44680479841\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\44680479841\\Desktop\\SpMedGroup-ProjetoApi\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\44680479841\\Desktop\\Clone SpMedGroup\\Senai-SpMedicalGroup-2TM-Manha-Apache\\Senai.SPMedicalGroup.WebAPI\\Senai.SPMedicalGroup.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
