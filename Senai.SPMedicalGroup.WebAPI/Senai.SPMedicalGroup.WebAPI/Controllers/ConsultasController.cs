@@ -52,7 +52,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
                                            observacoes = c.Observacoes,
                                            endereco = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Localidade,
                                            nomeClinica = c.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation.Nome,
-                                           statusConsulta = c.IdStatusNavigation.Nome                                           
+                                           statusConsulta = c.IdStatusNavigation.Nome
                                        };
                 return Ok(retornoConsultas);
             }

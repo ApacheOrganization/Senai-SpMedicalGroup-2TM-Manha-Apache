@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, Image, View, FlatList, ScrollView, AsyncStorage, StatusBar, TextInput, Picker } from 'react-native';
+import { Text, StyleSheet, Image, View, FlatList, ScrollView, AsyncStorage, StatusBar, TextInput, Picker, ActivityIndicator } from 'react-native';
 import { Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react-native';
 import api from '../services/api'
 
@@ -19,7 +19,8 @@ class ListaConsultasMedicos extends Component {
             ListaConsultas: [],
             listacomConsultas: [],
             nome: "",
-            status: ""
+            status: "",
+            loading: false
         };
 
     }
@@ -29,6 +30,7 @@ class ListaConsultasMedicos extends Component {
     }
 
     ListaConsultas = async () => {
+        this.setState({ loading: true })
         const value = await AsyncStorage.getItem("userToken")
         const answer = await api.get("/consultas/listarporusuariologado", {
             headers: {
@@ -39,6 +41,7 @@ class ListaConsultasMedicos extends Component {
 
         const dados = answer.data;
         this.setState({ listaConsultas: dados, listacomConsultas: dados });
+        this.setState({loading:false})
     }
 
     FiltraConsultas() {
@@ -57,6 +60,10 @@ class ListaConsultasMedicos extends Component {
     }
 
     render() {
+        const loader = 
+		this.state.loading?
+		<ActivityIndicator size="large" color="#FFFFFF" animating={true}/>:
+		null;
         return (
             <View style={styles.background}>
                 <ScrollView>

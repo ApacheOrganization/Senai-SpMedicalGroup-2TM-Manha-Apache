@@ -16,10 +16,10 @@ class Cabecalho extends Component{
     render(){
         if(usuarioAutenticado() && parseJwt().permissao === "Administrador"){
             return(
-                <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
+                <Navbar collapseOnSelect expand="lg" bg="blue" variant="blue">
                     <Navbar.Brand href="/"><img src={logo} alt="Logo" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
+                    <Navbar.Collapse id="responsive-navbar-nav" bg="blue">
                         <Nav className="mr-auto">
                         <Nav.Link href="/cadastroUsuario">Cadastrar Usuario</Nav.Link>
                         <Nav.Link href="/cadastroMedico">Cadastrar Médico</Nav.Link>

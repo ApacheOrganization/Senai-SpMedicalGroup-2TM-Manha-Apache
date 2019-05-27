@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { AsyncStorage, StyleSheet, Text, TextInput, View, ImageBackground, TouchableOpacity, Image, Alert, StatusBar } from 'react-native';
+import { AsyncStorage, StyleSheet, Text, TextInput, View, ImageBackground, TouchableOpacity, Image, Alert, StatusBar, ActivityIndicator } from 'react-native';
 import jwt from "jwt-decode";
-import api from '../services/api'
+import api from '../services/api';
 
 class TelaInicial extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { email: '', senha: '' };
+        this.state = { email: '', senha: '', loading: false };
     }
 
     componentDidMount() {
@@ -29,7 +29,16 @@ class TelaInicial extends Component {
         })()
     }
 
+    loader() {
+        (async () => {
+            let tokenvalidado = await AsyncStorage.getItem("userToken")
+            console.warn(tokenvalidado)
+
+        })()
+    };
+
     login = async () => {
+        this.setState({ loading: true })
         if (this.state.email == '') {
             Alert.alert(
                 "Erro",
@@ -67,21 +76,33 @@ class TelaInicial extends Component {
                             );
                         }
                     })
+
                 const token = resposta.data.token;
                 await AsyncStorage.setItem("userToken", token);
-                if (token.length > 10) {
-                    if (jwt(token).permissao == 'Administrador') {
-                        this.props.navigation.navigate('Home - Administrador')
-                    }
-                    if (jwt(token).permissao == 'Paciente') {
-                        this.props.navigation.navigate('Home - Paciente')
-                    } if (jwt(token).permissao == 'Médico') {
-                        this.props.navigation.navigate('Home - Medico')
+                if (token !== null) {
+                    if (token.length > 10) {
+                        if (jwt(token).permissao == 'Administrador') {
+                            this.props.navigation.navigate('Home - Administrador')
+                        }
+                        if (jwt(token).permissao == 'Paciente') {
+                            this.props.navigation.navigate('Home - Paciente')
+                        } if (jwt(token).permissao == 'Médico') {
+                            this.props.navigation.navigate('Home - Medico')
+                        }
+                    } else {
+                        Alert.alert(
+                            "Erro",
+                            "Seu usuário não foi autenticado",
+                            [
+                                { text: "OK", onPress: () => console.log("OK Pressed") }
+                            ],
+                            { cancelable: false }
+                        );
                     }
                 } else {
                     Alert.alert(
                         "Erro",
-                        "ASDASDASDASDl",
+                        "Seu usuário não foi autenticado",
                         [
                             { text: "OK", onPress: () => console.log("OK Pressed") }
                         ],
@@ -90,9 +111,14 @@ class TelaInicial extends Component {
                 }
             }
         }
+        this.setState({ loading: false })
     };
 
     render() {
+        const loader =
+            this.state.loading ?
+                <ActivityIndicator size="large" color="#FFFFFF" animating={true} /> :
+                null;
         return (
             <View>
                 <StatusBar backgroundColor="#5e9bff" barStyle="light-content" />
@@ -128,6 +154,8 @@ class TelaInicial extends Component {
                     >
                         <Text style={styles.textoBotao}>LOGIN</Text>
                     </TouchableOpacity>
+
+
                 </View>
             </View>
         )
@@ -135,6 +163,12 @@ class TelaInicial extends Component {
 }
 
 const styles = StyleSheet.create({
+    indicator: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 80
+    },
     conteudo: {
         width: "100%",
         height: "100%",
@@ -144,8 +178,8 @@ const styles = StyleSheet.create({
         backgroundColor: "white"
     },
     imageLogin: {
-        height:80,
-        width:75
+        height: 80,
+        width: 75
     },
     botao: {
         height: 38,

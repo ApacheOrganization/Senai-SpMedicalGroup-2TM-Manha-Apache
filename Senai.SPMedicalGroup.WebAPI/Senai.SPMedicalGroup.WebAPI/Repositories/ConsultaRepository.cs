@@ -59,7 +59,7 @@ namespace Senai.SPMedicalGroup.WebAPI.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
-                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation).Include(x => x.IdPacienteNavigation.IdUsuarioNavigation).Include(x=>x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdUsuarioNavigation.IdClinicaNavigation).Include(x => x.IdPacienteNavigation.IdUsuarioNavigation).Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation).Include(y => y.IdPacienteNavigation).Include(z => z.IdStatusNavigation).ToList();
             }
         }
 

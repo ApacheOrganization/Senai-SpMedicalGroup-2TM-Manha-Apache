@@ -10,7 +10,7 @@ import HomeMedico from './scr/pages/HomeMedico';
 import TelaInicial from './scr/pages/TelaInicial'
 
 //Desabilita Avisos Amarelos
-console.disableYellowBox = true;
+//console.disableYellowBox = true;
 
 export default class App extends Component {
   render() {
