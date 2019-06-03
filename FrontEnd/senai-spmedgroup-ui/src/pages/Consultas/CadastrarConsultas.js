@@ -43,7 +43,7 @@ class CadastroConsulta extends Component{
     }
 
     ListarPacientes(){
-      fetch(API + '/pacientes',{
+      fetch(API + '/usuarios/pacientes',{
           method: 'GET',
           headers : {
             "Content-Type" : "application/json",
@@ -55,7 +55,7 @@ class CadastroConsulta extends Component{
           .catch(erro => console.log(erro)) 
   }
   ListarMedicos(){
-    fetch(API + '/medicos',{
+    fetch(API + '/usuarios/medicos',{
         method: 'GET',
         headers : {
           "Content-Type" : "application/json",
