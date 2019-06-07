@@ -94,8 +94,8 @@ class CadastroConsulta extends Component{
 
             this.setState({date:
               year + '-' + month + '-' + date + 'T' + hours + ':' + min + ':' + sec,});
-              alert(date);
-          if(this.state.dataconsulta >= this.state.date){
+              alert(this.state.date);
+          if(this.state.dataconsulta > this.state.date){
             if (response.status === 200) {
               alert("Consulta Cadastrada!");
               this.Redirecionar();

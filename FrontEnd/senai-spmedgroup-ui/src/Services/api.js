@@ -1,2 +1,2 @@
-var API =  "http://192.168.3.84:5000/api";
+var API =  "https://spmedgroup-api.azurewebsites.net/api";
 export default API;

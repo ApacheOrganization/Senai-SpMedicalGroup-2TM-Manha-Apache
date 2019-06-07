@@ -56,7 +56,7 @@ class CadastroMedico extends Component {
             idClinica: this.state.idClinica,
             idEspecialidade: this.state.idEspecialidade,
             crm: this.state.crm,
-            IdTipoUsuario: this.state.IdTipoUsuario
+            IdTipoUsuario: 3
           }
         ),
         headers: {
