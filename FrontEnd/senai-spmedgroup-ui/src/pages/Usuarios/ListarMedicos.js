@@ -1,71 +1,68 @@
 import React, { Component } from "react";
 import Cabecalho from '../../Components/NavBar';
 import Rodape from '../../Components/Footer';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardText, MDBCol, MDBRow, MDBContainer, MDBCardHeader } from 'mdbreact';
 import API from '../../Services/api'
 
-class Medicos extends Component{
-    constructor(){
+class Medicos extends Component {
+    constructor() {
         super();
         this.state = {
-            medicos : []
+            medicos: []
         }
     }
 
-    ListarMedicos(){
+    ListarMedicos() {
         console.log('Bearer ' + localStorage.getItem("usuario-lindao"));
-        fetch(API +'/usuarios/medicos',{
+        fetch(API + '/usuarios/medicos', {
             method: 'GET',
-            headers : {
-            'Authorization': 'Bearer ' + localStorage.getItem("usuario-lindao"),
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("usuario-lindao"),
             }
         })
             .then(resposta => resposta.json())
-            .then(data => this.setState({ medicos : data }))
-            .catch(erro => console.log(erro)) 
+            .then(data => this.setState({ medicos: data }))
+            .catch(erro => console.log(erro))
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.ListarMedicos();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <Cabecalho/>
-                <br/>
-                <br/>
-              <MDBTable >
-                <MDBTableHead color="primary-color" textWhite>
-                    <tr>
-                        <th>#</th>
-                        <th>crm</th>
-                        <th>nome</th>
-                        <th>email</th>
-                        <th>telefone</th>
-                        <th>Especialidade</th>
-                    </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                    {
-                       this.state.medicos.map(function(med){
-                           return(
-                                <tr key={med.id}>
-                                    <td>{med.id}</td>
-                                    <td>{med.crm}</td>
-                                    <td>{med.nome}</td>
-                                    <td>{med.email}</td>
-                                    <td>{med.telefone}</td>
-                                    <td>{med.especialidade}</td>   
-                                </tr>
-                           );
-                       }) 
-                    }
-                </MDBTableBody>
-              </MDBTable>
-                <br/>
-                <br/>
-              <Rodape/>
+                <Cabecalho />
+                <h1 className='text-center' style={{marginTop:'2%'}}><span style={{color:'#42f498'}}>T</span><span style={{color:'#5fbfe1'}}>odos</span> <span style={{color:'#42f498'}}>M</span><span style={{color:'#5fbfe1'}}>édicos</span></h1>
+                <MDBContainer style={{marginTop:'3%'}}>
+                    <MDBRow className="mb-32">
+
+                        {
+                            this.state.medicos.map(function (med) {
+                                return (
+                                    <MDBCol sm="6" style={{marginBottom:"2.9%" }}>
+                                        <MDBCard>
+                                        <MDBCardHeader color="primary-color" tag="h3">
+                                                    Médico {med.id}
+                                                </MDBCardHeader>
+                                            <MDBCardBody >
+                                                <div style={{ marginLeft: "3%", marginBottom:"5%" }}>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Nome do Médico: </span>{med.nome}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>CRM: </span>{med.crm}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Email: </span>{med.email}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Especialidade: </span>{med.especialidade}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Telefone: </span>{med.telefone}</MDBCardText>
+                                                </div>
+                                            </MDBCardBody>
+                                        </MDBCard>
+                                    </MDBCol>
+                                );
+                            })
+                        }
+
+                    </MDBRow>
+                </MDBContainer>
+                <Rodape />
             </div>
         );
     }

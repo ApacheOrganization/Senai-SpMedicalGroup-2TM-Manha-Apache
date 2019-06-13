@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Cabecalho from '../../Components/NavBar';
 import Rodape from '../../Components/Footer';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardText, MDBCol, MDBRow, MDBContainer, MDBCardHeader } from 'mdbreact';
 import API from '../../Services/api'
 
 class Consultas extends Component{
@@ -31,46 +31,41 @@ class Consultas extends Component{
     render(){
         return(
             <div>
-                <Cabecalho/>
-                <br/>
-                <br/>
-              <MDBTable >
-                <MDBTableHead color="primary-color" textWhite>
-                <tr>
-                    <th>#</th>
-                    <th>CPF Paciente</th>
-                    <th>RG Paciente</th>
-                    <th>Endereço Paciente</th>
-                    <th>Nome Médico</th>
-                    <th>Data</th>
-                    <th>Observações</th>
-                    <th>Status</th>
-                    
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                {
-                       this.state.consultas.map(function(cons){
-                           return(
-                                <tr key={cons.idConsulta}>
-                                    <td>{cons.idConsulta}</td>
-                                    <td>{cons.pacienteCPF}</td>
-                                    <td>{cons.pacienteRG}</td>
-                                    <td>{cons.pacienteEnd}</td>
-                                    <td>{cons.nomeMedico}</td>
-                                    <td>{cons.dataConsulta}</td>
-                                    <td>{cons.observacoes}</td>
-                                    <td>{cons.statusConsulta}</td>
-                                </tr>
-                           );
-                       }) 
-                    }
-                </MDBTableBody>
-              </MDBTable>
-              <br/>
-              <br/>
-              <Rodape/>
+                <Cabecalho />
+                <h1 className='text-center' style={{marginTop:'2%'}}><span style={{color:'#42f498'}}>T</span><span style={{color:'#5fbfe1'}}>odas</span> <span style={{color:'#42f498'}}>C</span><span style={{color:'#5fbfe1'}}>onsultas</span></h1>
+                <MDBContainer style={{marginTop:'3%'}}>
+                    <MDBRow className="mb-32">
+
+                        {
+                            this.state.consultas.map(function(cons) {
+                                return (
+                                    <MDBCol sm="6" style={{marginBottom:"2.9%" }}>
+                                        <MDBCard>
+                                        <MDBCardHeader color="primary-color" tag="h3">
+                                                    Consulta {cons.idConsulta}
+                                                </MDBCardHeader>
+                                            <MDBCardBody >
+                                                <div style={{ marginLeft: "3%", marginBottom:"5%" }}>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>CPF do Paciente: </span>{cons.pacienteCPF}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>RG do Paciente: </span>{cons.pacienteRG}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Endereço do Paciente: </span>{cons.pacienteEnd}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Nome do Médico: </span>{cons.nomeMedico}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Data da consulta: </span>{cons.dataConsulta}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Observações: </span>{cons.observacoes}</MDBCardText>
+                                                    <MDBCardText><span style={{ fontWeight: 'bold' }}>Status: </span>{cons.statusConsulta}</MDBCardText>
+                                                </div>
+                                            </MDBCardBody>
+                                        </MDBCard>
+                                    </MDBCol>
+                                );
+                            })
+                        }
+
+                    </MDBRow>
+                </MDBContainer>
+                <Rodape />
             </div>
+            
         );
     }
 }

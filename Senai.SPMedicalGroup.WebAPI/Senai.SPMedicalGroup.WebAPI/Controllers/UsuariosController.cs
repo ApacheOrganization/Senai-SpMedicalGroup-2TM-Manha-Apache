@@ -144,9 +144,12 @@ namespace Senai.SPMedicalGroup.WebAPI.Controllers
 
                 return Ok();
             }
-            catch  (Exception ex)
+            catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(new
+                {
+                    mensagem = "Erro: " + ex
+                });
             }
         }
     }

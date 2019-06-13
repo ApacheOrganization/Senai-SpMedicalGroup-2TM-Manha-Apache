@@ -16,15 +16,15 @@ class Cabecalho extends Component{
     render(){
         if(usuarioAutenticado() && parseJwt().permissao === "Administrador"){
             return(
-                <Navbar collapseOnSelect expand="lg" bg="blue" variant="blue">
+                <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
                     <Navbar.Brand href="/"><img src={logo} alt="Logo" /></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                     <Navbar.Collapse id="responsive-navbar-nav" bg="blue">
                         <Nav className="mr-auto">
-                        <Nav.Link href="/cadastroUsuario">Cadastrar Usuario</Nav.Link>
-                        <Nav.Link href="/cadastroMedico">Cadastrar Médico</Nav.Link>
-                        <Nav.Link href="/cadastroClinica">Cadastrar Clínica</Nav.Link>
-                        <Nav.Link href="/cadastroConsulta">Cadastrar Consulta</Nav.Link>
+                        <Nav.Link style={{color:'white'}} href="/cadastroUsuario">Cadastrar Usuario</Nav.Link>
+                        <Nav.Link style={{color:'white'}} href="/cadastroMedico">Cadastrar Médico</Nav.Link>
+                        <Nav.Link style={{color:'white'}} href="/cadastroClinica">Cadastrar Clínica</Nav.Link>
+                        <Nav.Link style={{color:'white'}} href="/cadastroConsulta">Cadastrar Consulta</Nav.Link>
                         <NavDropdown title="Listas" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="/usuarios/pacientes">Lista Pacientes</NavDropdown.Item>
                             <NavDropdown.Item href="/usuarios/medicos">Lista Médicos</NavDropdown.Item>
@@ -61,7 +61,7 @@ class Cabecalho extends Component{
             );
         }else if(usuarioAutenticado() && parseJwt().permissao === "MÃ©dico"){
                 return(
-                    <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
+                    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark"  style={{background:"#5fbfe1 !important"}} >
                     <Navbar.Brand href="/"><img src={logo} alt="Logo" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -96,7 +96,7 @@ class Cabecalho extends Component{
                 );
         }else if(usuarioAutenticado() && parseJwt().permissao === "Paciente"){
             return(
-                    <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
+                    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{background:"#5fbfe1 !important"}}>
                         <Navbar.Brand href="/"><img src={logo} alt="Logo" /></Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
@@ -131,7 +131,7 @@ class Cabecalho extends Component{
                     );
         }else{
             return (
-                <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
+                <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{background:"#5fbfe1 !important"}}>
                     <Navbar.Brand href="/"><img src={logo} alt="Logo" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

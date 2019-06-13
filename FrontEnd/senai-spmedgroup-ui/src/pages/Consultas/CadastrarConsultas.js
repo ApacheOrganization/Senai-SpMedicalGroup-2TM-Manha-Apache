@@ -146,15 +146,15 @@ class CadastroConsulta extends Component{
             <Cabecalho/>
             <br/>
             <br/>
-              <MDBContainer style={{marginLeft:"40em"}}>
+              <MDBContainer>
                 <MDBRow>
-                  <MDBCol md="6">
+                  <MDBCol className="text-center">
                   <MDBCard>
                   <MDBCardBody>
                     <form onSubmit={this.CadastraConsulta.bind(this)}>
                       <p className="h5 text-center mb-4">Cadastrar Consulta</p>
                       <div className="grey-text">
-                      <select value={this.state.idpaciente} style={{width:"29em", marginLeft:"2em"}} onChange={this.atualizaEstadoidpacienteFormulario} className="browser-default custom-select">
+                      <select value={this.state.idpaciente} onChange={this.atualizaEstadoidpacienteFormulario} className="browser-default custom-select">
                         <option>Paciente</option>
                         {
                           this.state.Pacientes.map((element) =>{
@@ -167,7 +167,7 @@ class CadastroConsulta extends Component{
                       <br/>
                       <br/>
                       <br/>
-                      <select value={this.state.idmedico} style={{width:"29em", marginLeft:"2em"}} onChange={this.atualizaEstadoidmedicoFormulario} className="browser-default custom-select">
+                      <select value={this.state.idmedico} onChange={this.atualizaEstadoidmedicoFormulario} className="browser-default custom-select">
                         <option>Medico</option>
                         {
                           this.state.Medicos.map((element) =>{
@@ -202,7 +202,7 @@ class CadastroConsulta extends Component{
                           onChange={this.atualizaEstadoobservacoesFormulario}
                           />
 
-                      <select value={this.state.idstatus} style={{width:"29em", marginLeft:"2em"}} onChange={this.atualizaEstadoidstatusFormulario} className="browser-default custom-select">
+                      <select value={this.state.idstatus} onChange={this.atualizaEstadoidstatusFormulario} className="browser-default custom-select">
                         <option>Status Consulta</option>
                         <option value="1">Confirmada</option>
                         <option value="2">Recusada</option>

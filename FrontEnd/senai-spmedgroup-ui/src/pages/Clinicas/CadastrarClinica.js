@@ -94,11 +94,10 @@ class CadastrarClinicas extends Component{
 <Cabecalho/>
 <br/>
             <br/>
-  <MDBContainer style={{marginLeft:"40em"}}>
+  <MDBContainer>
     <MDBRow>
-      <MDBCol md="6">
+      <MDBCol className="text-center">
       <MDBCard>
-
         <MDBCardBody>
 
         <form onSubmit={this.CadastraClinica.bind(this)}>
