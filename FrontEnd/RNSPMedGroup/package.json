@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "accordion-collapse-react-native": "^0.1.10",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "jwt-decode": "^2.2.0",
     "loader": "^2.1.1",
     "lodash": "^4.17.11",
